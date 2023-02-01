@@ -12,7 +12,7 @@ public class JasyptConfigTest {
 
     @Test
     void jasypt() {
-        String url = "your-url-as-string";
+        String url = "jdbc:mysql:localhost:3306";
         String username = "your-id-as-string";
         String password = "your-password-as-string";
 
