@@ -13,9 +13,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -25,7 +27,7 @@ import lombok.ToString;
 public class Todo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Integer id;
+    protected Long id;
 
     @Column(nullable = false, length = 50)
     private String item;

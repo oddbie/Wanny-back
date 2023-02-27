@@ -28,25 +28,34 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    // @Bean
+    // public WebSecurityCustomizer webSecurityCustomizer() {
+    // return (web) -> web.ignoring().antMatchers("/favicon.ico");
+    // }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-
-                .exceptionHandling()
+            http.csrf().disable();
+            http.exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
+                        .accessDeniedHandler(jwtAccessDeniedHandler);
 
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        http.sessionManagement()
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-                // .and()
-                // .authorizeRequests()
-                // .antMatchers("/", "/api/hello", "/api/**").permitAll()
-                // .anyRequest().authenticated()
+        // http.authorizeHttpRequests()
+        // .antMatchers("/favicon.ico").permitAll()
+        // .anyRequest().authenticated();
+        http
+                        // .antMatchers("/", "/api/hello").permitAll()
+                        .antMatcher("/api/secure/**")
+                        .authorizeRequests()
+                        .antMatchers("/favicon.ico").permitAll()
+                        .antMatchers("/auth/**").permitAll()
+                        .antMatchers("/api/**").permitAll()
+                        .anyRequest().authenticated();
 
-                .and()
+        http
                 .apply(new JwtSecurityConfig(tokenProvider));
 
         return http.build();

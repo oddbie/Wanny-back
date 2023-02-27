@@ -9,10 +9,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
-// @RequestMapping("/api")
+@RequestMapping("/api")
 @Slf4j
 public class HelloController {
-    @GetMapping("/api/hello")
+    @GetMapping("/hello")
     public String Hello() {
         log.info("hello api called");
         return "Hello from Spring\n";

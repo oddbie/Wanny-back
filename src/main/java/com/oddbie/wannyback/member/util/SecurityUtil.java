@@ -7,13 +7,13 @@ public class SecurityUtil {
     private SecurityUtil() {
     }
 
-    public static Integer getCurrentMemberId() {
+    public static Long getCurrentMemberId() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null || authentication.getName() == null) {
             throw new RuntimeException("No Auth Info");
         }
 
-        return Integer.parseInt(authentication.getName());
+        return Long.parseLong(authentication.getName());
     }
 }

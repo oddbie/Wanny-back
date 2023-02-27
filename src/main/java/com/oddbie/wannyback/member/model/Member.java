@@ -25,12 +25,12 @@ import javax.persistence.Column;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer seq;
+    private Long seq;
 
     @Column(nullable = false, length = 50)
     private String email;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 60)
     private String pw;
 
     @Column
