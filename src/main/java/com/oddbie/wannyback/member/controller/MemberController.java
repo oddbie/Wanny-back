@@ -29,6 +29,13 @@ public class MemberController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<MemberResponseDto> login(@RequestBody MemberRequestDto memberRequestDto) {
+        log.info("receive login request {} {}", memberRequestDto.getEmail(), memberRequestDto.getPw());
+        memberService.loginMember(memberRequestDto);
+        return ResponseEntity.ok().build();
+    }
+
     @GetMapping("/me")
     public ResponseEntity<MemberResponseDto> findMemberInfoById() {
         return ResponseEntity.ok(memberService.findMemberInfoById(SecurityUtil.getCurrentMemberId()));
