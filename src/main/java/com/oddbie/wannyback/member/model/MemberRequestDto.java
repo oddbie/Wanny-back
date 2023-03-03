@@ -6,16 +6,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Slf4j
 public class MemberRequestDto {
     private String email;
     private String pw;
 
     public Member toMember(PasswordEncoder passwordEncoder) {
-        return Member.builder().email(email).pw(pw).role(UserRole.ROLE_USER).build();
+        return Member.builder().email(email).pw(passwordEncoder.encode(pw)).role(UserRole.ROLE_USER).build();
     }
 
     public UsernamePasswordAuthenticationToken toAuthentication() {
